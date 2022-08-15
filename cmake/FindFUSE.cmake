@@ -10,7 +10,7 @@ IF (FUSE_INCLUDE_DIRS)
 ENDIF (FUSE_INCLUDE_DIRS)
 
 if (APPLE)
-    set (FUSE_NAMES libosxfuse.dylib fuse)
+    set (FUSE_NAMES libfuse.dylib fuse)
     set (FUSE_SUFFIXES osxfuse fuse)
 elseif(WINDOWS)
     set (FUSE_NAMES libdokanfuse1)
@@ -26,7 +26,8 @@ find_path (FUSE_INCLUDE_DIR fuse.h
         PATH_SUFFIXES ${FUSE_SUFFIXES})
 
 # find lib
-find_library (FUSE_LIBRARIES NAMES ${FUSE_NAMES})
+find_library (FUSE_LIBRARIES NAMES ${FUSE_NAMES}
+        PATHS /usr/local/lib)
 
 include ("FindPackageHandleStandardArgs")
 find_package_handle_standard_args ("FUSE" DEFAULT_MSG
