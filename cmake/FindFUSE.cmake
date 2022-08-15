@@ -11,6 +11,7 @@ ENDIF (FUSE_INCLUDE_DIRS)
 
 FIND_PATH (FUSE_INCLUDE_DIRS fuse.h
 	/usr/local/include/fuse
+)
 
 if (APPLE)
     SET(FUSE_NAMES libosxfuse.dylib fuse)
