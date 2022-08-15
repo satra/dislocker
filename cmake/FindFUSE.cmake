@@ -12,17 +12,11 @@ ENDIF (FUSE_INCLUDE_DIRS)
 if (APPLE)
     set (FUSE_NAMES libfuse.dylib fuse)
     set (FUSE_SUFFIXES osxfuse fuse)
-elseif(WINDOWS)
-    set (FUSE_NAMES libdokanfuse1)
-    set (FUSE_SUFFIXES dokanfuse1)
-else()
-    set(FUSE_NAMES fuse)
-    set(FUSE_SUFFIXES fuse)
-endif()
+endif (APPLE)
 
 # find includes
 find_path (FUSE_INCLUDE_DIR fuse.h
-        PATHS /opt /opt/local /usr/pkg
+        PATHS /usr/local/include/fuse
         PATH_SUFFIXES ${FUSE_SUFFIXES})
 
 # find lib
