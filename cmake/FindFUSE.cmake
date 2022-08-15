@@ -10,7 +10,7 @@ IF (FUSE_INCLUDE_DIRS)
 ENDIF (FUSE_INCLUDE_DIRS)
 
 if (APPLE)
-    set (FUSE_NAMES libfuse.dylib fuse)
+    set (FUSE_NAMES libosxfuse.2.dylib fuse)
     set (FUSE_SUFFIXES osxfuse fuse)
 endif (APPLE)
 
