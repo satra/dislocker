@@ -9,14 +9,27 @@ IF (FUSE_INCLUDE_DIRS)
         SET (FUSE_FIND_QUIETLY TRUE)
 ENDIF (FUSE_INCLUDE_DIRS)
 
-FIND_PATH (FUSE_INCLUDE_DIRS fuse.h
-        PATHS /usr/local/include/fuse
-)
-
 if (APPLE)
-    SET(FUSE_NAMES libosxfuse.dylib fuse)
+    set (FUSE_NAMES libosxfuse.dylib fuse)
+    set (FUSE_SUFFIXES osxfuse fuse)
+elseif(WINDOWS)
+    set (FUSE_NAMES libdokanfuse1)
+    set (FUSE_SUFFIXES dokanfuse1)
+else()
+    set(FUSE_NAMES fuse)
+    set(FUSE_SUFFIXES fuse)
+endif()
 
-FIND_PACKAGE (PkgConfig REQUIRED)
-pkg_check_modules (FUSE REQUIRED fuse)
+# find includes
+find_path (FUSE_INCLUDE_DIR fuse.h
+        PATHS /opt /opt/local /usr/pkg
+        PATH_SUFFIXES ${FUSE_SUFFIXES})
+
+# find lib
+find_library (FUSE_LIBRARIES NAMES ${FUSE_NAMES})
+
+include ("FindPackageHandleStandardArgs")
+find_package_handle_standard_args ("FUSE" DEFAULT_MSG
+    FUSE_INCLUDE_DIR FUSE_LIBRARIES)
 
 mark_as_advanced (FUSE_INCLUDE_DIRS FUSE_LIBRARIES FUSE_LIBRARY_DIRS)
