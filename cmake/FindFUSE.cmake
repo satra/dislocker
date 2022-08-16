@@ -9,11 +9,6 @@ IF (FUSE_INCLUDE_DIRS)
         SET (FUSE_FIND_QUIETLY TRUE)
 ENDIF (FUSE_INCLUDE_DIRS)
 
-if (APPLE)
-    set (FUSE_NAMES libosxfuse.2.dylib fuse)
-    set (FUSE_SUFFIXES osxfuse fuse)
-endif (APPLE)
-
 FIND_PACKAGE (PkgConfig REQUIRED)
 pkg_check_modules (FUSE REQUIRED fuse)
 
