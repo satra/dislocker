@@ -7,7 +7,7 @@ require 'formula'
 class Dislocker < Formula
     head 'https://github.com/satra/dislocker.git'
 
-    depends_on 'mbedtls'
+    depends_on 'mbedtls@2'
     depends_on 'cmake'
 #    This dependency is separately installed, as a cask
 #    depends_on :osxfuse
