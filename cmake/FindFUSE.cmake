@@ -14,17 +14,9 @@ if (APPLE)
     set (FUSE_SUFFIXES osxfuse fuse)
 endif (APPLE)
 
-# find includes
-find_path (FUSE_INCLUDE_DIR fuse.h
-        PATHS /usr/local/include/fuse
-        PATH_SUFFIXES ${FUSE_SUFFIXES})
+FIND_PACKAGE (PkgConfig REQUIRED
+        CONFIGS /usr/local/lib/pkgconfig/fuse.pc
+)
+pkg_check_modules (FUSE REQUIRED fuse)
 
-# find lib
-find_library (FUSE_LIBRARIES NAMES ${FUSE_NAMES}
-        PATHS /usr/local/lib)
-
-include ("FindPackageHandleStandardArgs")
-find_package_handle_standard_args ("FUSE" DEFAULT_MSG
-    FUSE_INCLUDE_DIR FUSE_LIBRARIES)
-
-mark_as_advanced (FUSE_INCLUDE_DIRS FUSE_LIBRARIES)
+mark_as_advanced (FUSE_INCLUDE_DIRS FUSE_LIBRARIES FUSE_LIBRARY_DIRS)
